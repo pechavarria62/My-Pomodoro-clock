@@ -1,0 +1,28 @@
+.clock{
+    border: 7px solid #13353a;
+    margin: 15px auto 10px auto;
+    width: 270px;
+    height: 170px;
+    border-radius: 50px;
+    position: relative;
+    font-family: digital;
+    background: linear-gradient(#78e4e4, #0dcaf0);
+}
+#time-left{
+    font-size: 80px;
+    padding-bottom: 40px;
+    
+}
+#timer-label{
+    font-size: 40px;
+}
+.buttons{
+    font-size: 55px;
+    margin: 20px auto 10px auto;
+    width: 220px;
+    height: 80px;
+    position: relative;
+}
+.text-primary{
+    font-size: 45px;
+}
