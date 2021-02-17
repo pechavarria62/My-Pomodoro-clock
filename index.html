@@ -21,20 +21,22 @@
             <div class="clock">
                 <div id="timer-label" class="text-center">session</div>
                 <div id="time-left" class="text-center">
-                    <span id="minutes">25:00</span>
+                    <span id="minutes">25</span>:<span id="seconds">00</span>
+                    
                 </div>
                 
                 
             </div>
+            <audio src="Audio-1.0.mp4" id="beep"></audio>
             <div class="buttons">
-                <a href="#" id="start-stop">
+                <a href="#" id="start-stop" onclick="toggleOnOff()">
                     <i class="far fa-play-circle text-center"></i>
                     <i class="far fa-pause-circle"></i>
                 </a>
-                <a href="#" id="reset"><i class="fas fa-redo-alt"></i></a>
+                <a href="#" id="reset" onclick="resetBtn()"><i class="fas fa-redo-alt"></i></a>
             </div>
             <div class="row text-center">
-                <div class="col">
+                <div class="col"> 
                     <div id="break-label">
                         <h2>
                             <i class="fas fa-heart-broken px-2"></i>

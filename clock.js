@@ -29,40 +29,53 @@ function decrementSession() {
         sessionLength.innerText = decrementedSessionValue;
         document.getElementById("minutes").innerText = decrementedSessionValue;
     }
+    
 }
-var clockCount = document.getElementById('start-stop').addEventListener('click', timerOn);
-function timeCounter(arg1, arg2) {
-    var sessionTime = arg1;
-    var breakTime = arg2;
-    var interval = setInterval(function() {
-        arg1 -= 1000;
-        var getDate = new Date();
-        getDate.setTime(arg1);
-        var timer = parseFloat(document.getElementById("minutes").innerHTML);
-        timer.innerHTML = ('0' + getDate.getMinutes()).slice(-2) + ":" + ('0' + getDate.getSeconds()).slice(-2);
 
-        if (arg1 === 0) {
-        var snd = new Audio("Audio-1.0mp4");
-        snd.play();
-        var whatIsCounted = document.getElementById("timer-label");
-        whatIsCounted.textContent = whatIsCounted.textContent == "session" ? whatIsCounted.textContent = "break" : whatIsCounted.textContent = "session";
-        clearInterval(interval);
-        timeCounter(breakTime, sessionTime);
-        }
-    }, 1000);
+function toggleOnOff() {
+    let min = document.getElementById("minutes");
+    let sec = document.getElementById("seconds");
+    let bMin = document.getElementById("break-length");
+    let session = document.getElementById("timer-label"); 
 
-    // ------ reset button 
-    var resetBttn = document.getElementById('reset').addEventListener('click', resetTimer);
-    function resetTimer() {
-        window.clearInterval(interval);
-        document.getElementById("timer-label").textContent = "session";
-        document.getElementById("minutes").textContent = "25:00";
+    minutes = parseFloat(min.innerHTML);
+    bMinutes = parseFloat(bMin.innerHTML);
+    seconds = 59;
+
+
+    let minutes_intervals = setInterval(minutesTimer, 60000);
+    let seconds_intervals = setInterval(secondsTimer, 1000);
+
+    function minutesTimer() {
+        minutes--;
+        min.innerHTML = minutes;
+        
     }
-}
+    
+    function secondsTimer() {
+        seconds--;
 
-function timerOn() {
-    var userBreakTime = Number(document.getElementById('break-length').innerText) * 60000;
-    var userSessionTime = Number(document.getElementById('minutes').innerText) * 60000;
-    document.getElementById("timer-label").textContent = "session";
-    timeCounter(userSessionTime, userBreakTime);
+        sec.innerHTML = seconds;
+        if(seconds <= 0 ){
+            if(minutes <= 0){
+                session.innerHTML = "Break";
+                minutes = parseFloat(bMin.innerHTML);
+                
+                
+                
+                
+            }
+            
+        seconds = 60
+        }
+        
+    }
+    
+
+}
+    
+function resetBtn() {
+    console.log("fuck")
+
+        // reset app state to default
 }
