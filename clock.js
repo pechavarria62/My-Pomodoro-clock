@@ -1,5 +1,5 @@
 function incrementBreak() {
-    let breakLength = document.getElementById("break-length");
+    var breakLength = document.getElementById("break-length");
     if (parseFloat(breakLength.innerText) < 60) {
         breakLength.innerText = parseFloat(breakLength.innerText) + 1;
 
@@ -7,75 +7,107 @@ function incrementBreak() {
     
 }
 function decrementBreak() {
-    let breakLength = document.getElementById("break-length");
-    if (parseFloat(breakLength.innerText) > 0) {
+    var breakLength = document.getElementById("break-length");
+    if (parseFloat(breakLength.innerText) > 1) {
         breakLength.innerText = parseFloat(breakLength.innerText) - 1;
 
     }
 
 }
 function incrementSession(){
-    let sessionLength = document.getElementById("session-length");
+    var sessionLength = document.getElementById("session-length");
     if (parseFloat(sessionLength.innerText) < 60) {
-        let incrementedSessionValue = parseFloat(sessionLength.innerText) + 1;
+        var incrementedSessionValue = parseFloat(sessionLength.innerText) + 1;
         sessionLength.innerText = incrementedSessionValue;
         document.getElementById("minutes").innerText = incrementedSessionValue;
     }
 }
 function decrementSession() {
-    let sessionLength = document.getElementById("session-length");
-    if (parseFloat(sessionLength.innerText) > 0) {
-        let decrementedSessionValue = parseFloat(sessionLength.innerText) - 1;
+    var sessionLength = document.getElementById("session-length");
+    if (parseFloat(sessionLength.innerText) > 1) {
+        var decrementedSessionValue = parseFloat(sessionLength.innerText) - 1;
         sessionLength.innerText = decrementedSessionValue;
         document.getElementById("minutes").innerText = decrementedSessionValue;
     }
     
 }
 
-function toggleOnOff() {
-    let min = document.getElementById("minutes");
-    let sec = document.getElementById("seconds");
-    let bMin = document.getElementById("break-length");
-    let session = document.getElementById("timer-label"); 
+var minutes_intervals;
+var seconds_intervals;
+var rContext = "start";
 
+
+function toggleOnOff() {
+    
+    // var audio = new Audio('audio_file.mp3');
+        
+    var min = document.getElementById('minutes');
+    var sec = document.getElementById('seconds');
+
+        
+        
+    sec.innerHTML = "59";
+    
+    
+
+    var bMin = document.getElementById("break-length");
+    var session = document.getElementById("timer-label"); 
     minutes = parseFloat(min.innerHTML);
     bMinutes = parseFloat(bMin.innerHTML);
-    seconds = 59;
-
-
-    let minutes_intervals = setInterval(minutesTimer, 60000);
-    let seconds_intervals = setInterval(secondsTimer, 1000);
-
+    seconds = parseFloat(sec.innerHTML);
+    
+    minutes_intervals = setInterval(minutesTimer, 60000);
+    seconds_intervals = setInterval(secondsTimer, 1000);
+    
+    
     function minutesTimer() {
         minutes--;
+        
         min.innerHTML = minutes;
         
     }
     
     function secondsTimer() {
         seconds--;
-
+        
         sec.innerHTML = seconds;
-        if(seconds <= 0 ){
-            if(minutes <= 0){
+        if(seconds == "0" ){
+            if(min.innerHTML === "0"){
                 session.innerHTML = "Break";
-                minutes = parseFloat(bMin.innerHTML);
+                document.getElementById('beep').play();
+                minutes = bMinutes
+                if (seconds <= "0" && bMinutes <= "0"){
                 
-                
-                
+                    document.getElementById('beep').play();
+                    window.clearInterval(minutes_intervals);
+                    window.clearInterval(seconds_intervals);
+                    document.getElementById('minutes').innerHTML = '25';
+                    document.getElementById('seconds').innerHTML = '00';
+                    document.getElementById("session-length").innerHTML = "25";
+                    document.getElementById("break-length").innerHTML = "5";
+            
+                };
                 
             }
             
-        seconds = 60
+            
+            seconds = "60"
         }
         
     }
     
+    i
 
 }
     
-function resetBtn() {
-    console.log("fuck")
-
         // reset app state to default
+function resetBtn() {
+
+    window.clearInterval(minutes_intervals);
+    window.clearInterval(seconds_intervals);
+    document.getElementById('minutes').innerHTML = '25';
+    document.getElementById('seconds').innerHTML = '00';
+    document.getElementById("session-length").innerHTML = "25";
+    document.getElementById("break-length").innerHTML = "5";
+    
 }
